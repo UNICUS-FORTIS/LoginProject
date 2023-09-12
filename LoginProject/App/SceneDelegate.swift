@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene) // 여기부터 구현하면 됨.
-        let vc = UINavigationController(rootViewController: FollowUpViewController())
+        let vc = UINavigationController(rootViewController: LoginViewController())
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         

@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 
-final class FollowUpViewController: UIViewController {
-
-    lazy var titleLabel:UILabel = {
+final class LoginViewController: UIViewController {
+    
+    let viewModel = LoginViewModel()
+    
+    let titleLabel:UILabel = {
         let label = UILabel()
         label.text = "JJAPFLIX"
         label.textColor = .red
@@ -19,13 +21,13 @@ final class FollowUpViewController: UIViewController {
         return label
     }()
     
-    lazy var idTextField = SignInfoTextField(placeHolder: SignInCategory.idTextField)
-    lazy var pwTextField = SignInfoTextField(placeHolder: SignInCategory.pwTextField)
-    lazy var nickNameTextField = SignInfoTextField(placeHolder: SignInCategory.nickName)
-    lazy var locationTextField = SignInfoTextField(placeHolder: SignInCategory.location)
-    lazy var recommandTextField = SignInfoTextField(placeHolder: SignInCategory.recommanded)
+    let idTextField = SignInfoTextField(placeHolder: SignInCategory.idTextField)
+    let pwTextField = SignInfoTextField(placeHolder: SignInCategory.pwTextField)
+    let nickNameTextField = SignInfoTextField(placeHolder: SignInCategory.nickName)
+    let locationTextField = SignInfoTextField(placeHolder: SignInCategory.location)
+    let recommandTextField = SignInfoTextField(placeHolder: SignInCategory.recommanded)
     
-    lazy var signInButton:UIButton = {
+    let signInButton:UIButton = {
         let btn = UIButton()
         btn.setTitle("회원가입", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -36,7 +38,7 @@ final class FollowUpViewController: UIViewController {
         return btn
     }()
     
-    lazy var additionalInfoLabel: UILabel = {
+    let additionalInfoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.text = "추가 정보 입력"
@@ -45,7 +47,7 @@ final class FollowUpViewController: UIViewController {
         return label
     }()
     
-    lazy var toggleSwitch: UISwitch = {
+    let toggleSwitch: UISwitch = {
         let swc = UISwitch()
         swc.onTintColor = .systemPink
         swc.isEnabled = true
@@ -53,17 +55,50 @@ final class FollowUpViewController: UIViewController {
         return swc
     }()
     
-
+    lazy var components:[UIView] = [titleLabel, idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField, signInButton, additionalInfoLabel,toggleSwitch]
+    
+    lazy var inputTargets = [idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField ]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
-        var components:[Any] = [titleLabel, idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField, signInButton, additionalInfoLabel,toggleSwitch]
-        components.forEach { components in
-            view.addSubview(components as! UIView)
-        }
-
+        configure()
         setContstraints()
+        setupBindingObject()
+    }
+    
+    private func setupBindingObject() {
+        for (idx, obj) in inputTargets.enumerated() {
+            let object = viewModel.textFieldObject[idx]
+            object.bind { text in
+                obj.text = text
+            }
+        }
+        
+        viewModel.isValid.bind { bool in
+            self.signInButton.isEnabled = bool
+            self.signInButton.backgroundColor = bool ? .red : .black
+        }
+    }
+    
+    
+    private func configure() {
+        components.forEach { components in
+            view.addSubview(components)
+        }
+        
+        inputTargets.forEach { $0.addTarget(self, action: #selector(eachButtonChanged), for: .editingChanged)
+        }
+    }
+    
+    @objc func eachButtonChanged() {
+        
+        for (idx, _) in inputTargets.enumerated() {
+            let object = viewModel.textFieldObject[idx]
+            object.value = inputTargets[idx].text ?? ""
+            viewModel.checkValidation()
+        }
     }
     
     private func setContstraints() {

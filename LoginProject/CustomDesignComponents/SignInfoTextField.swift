@@ -38,31 +38,4 @@ class SignInfoTextField: UITextField {
         
         attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: placeholderAttributes)
     }
-    
-    
-    
-    
-    
-    
-//    func configureUI(title: String, imageTitle: String) {
-//        var configuration = UIButton.Configuration.bordered()
-//        var attString = AttributedString(String(describing: title))
-//        attString.font = .boldSystemFont(ofSize: 17)
-//        attString.foregroundColor = .black
-//        configuration.attributedTitle = attString
-//        configuration.image = UIImage(named: String(describing: imageTitle))
-//        configuration.imagePadding = 20
-//        configuration.preferredSymbolConfigurationForImage = .init(pointSize: 5)
-//        configuration.imagePlacement = .leading
-//        configuration.baseBackgroundColor = .white
-//        configuration.background.strokeColor = .lightGray
-//        configuration.background.strokeWidth = 1
-//        configuration.cornerStyle = .dynamic
-//        configuration.contentInsets = .init(top: 20, leading: 10, bottom: 20, trailing: 60)
-//
-//        self.configuration = configuration
-//    }
-    
-    
-    
 }
