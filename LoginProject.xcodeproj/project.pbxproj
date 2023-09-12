@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		DE5052FB2AB0E7370045AE3A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DE5052FE2AB0E8490045AE3A /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		DE86EEA92A9786BB00709CA7 /* CustomViewPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomViewPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE86EEA92A9786BB00709CA7 /* LoginProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE86EEAC2A9786BB00709CA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE86EEAE2A9786BB00709CA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DE86EEB02A9786BB00709CA7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		DE86EEAA2A9786BB00709CA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DE86EEA92A9786BB00709CA7 /* CustomViewPractice.app */,
+				DE86EEA92A9786BB00709CA7 /* LoginProject.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DE86EEA82A9786BB00709CA7 /* CustomViewPractice */ = {
+		DE86EEA82A9786BB00709CA7 /* LoginProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DE86EEBD2A9786BB00709CA7 /* Build configuration list for PBXNativeTarget "CustomViewPractice" */;
+			buildConfigurationList = DE86EEBD2A9786BB00709CA7 /* Build configuration list for PBXNativeTarget "LoginProject" */;
 			buildPhases = (
 				DE86EEA52A9786BB00709CA7 /* Sources */,
 				DE86EEA62A9786BB00709CA7 /* Frameworks */,
@@ -141,12 +141,12 @@
 			);
 			dependencies = (
 			);
-			name = CustomViewPractice;
+			name = LoginProject;
 			packageProductDependencies = (
 				DE86EEC42A97982E00709CA7 /* SnapKit */,
 			);
 			productName = CustomViewPractice;
-			productReference = DE86EEA92A9786BB00709CA7 /* CustomViewPractice.app */;
+			productReference = DE86EEA92A9786BB00709CA7 /* LoginProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DE86EEA82A9786BB00709CA7 /* CustomViewPractice */,
+				DE86EEA82A9786BB00709CA7 /* LoginProject */,
 			);
 		};
 /* End PBXProject section */
@@ -349,7 +349,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R5RPU2QP33;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomViewPractice/Info.plist;
+				INFOPLIST_FILE = LoginProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -379,7 +379,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R5RPU2QP33;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomViewPractice/Info.plist;
+				INFOPLIST_FILE = LoginProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DE86EEBD2A9786BB00709CA7 /* Build configuration list for PBXNativeTarget "CustomViewPractice" */ = {
+		DE86EEBD2A9786BB00709CA7 /* Build configuration list for PBXNativeTarget "LoginProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DE86EEBE2A9786BB00709CA7 /* Debug */,
