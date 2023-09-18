@@ -55,7 +55,18 @@ final class LoginViewController: UIViewController {
         return swc
     }()
     
-    lazy var components:[UIView] = [titleLabel, idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField, signInButton, additionalInfoLabel,toggleSwitch]
+    let statusLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .lightGray
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 13)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    lazy var components:[UIView] = [titleLabel, idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField, signInButton, additionalInfoLabel, toggleSwitch, statusLabel]
     
     lazy var inputTargets = [idTextField, pwTextField, nickNameTextField, locationTextField, recommandTextField ]
     
@@ -66,6 +77,7 @@ final class LoginViewController: UIViewController {
         configure()
         setContstraints()
         setupBindingObject()
+        statusLabel.text = ""
     }
     
     private func setupBindingObject() {
@@ -76,9 +88,34 @@ final class LoginViewController: UIViewController {
             }
         }
         
-        viewModel.isValid.bind { bool in
+        viewModel.isAllValid.bind { bool in
             self.signInButton.isEnabled = bool
             self.signInButton.backgroundColor = bool ? .red : .black
+        }
+        
+        viewModel.emailIsValid.bind { bool in
+            self.statusLabel.text = bool ? "올바른 이메일 주소 입니다." : "올바른 이메일 주소를 입력해주세요."
+            self.idTextField.backgroundColor = bool ? .systemGreen : .gray
+        }
+        
+        viewModel.pwIsValid.bind { bool in
+            self.statusLabel.text = bool ? "올바른 패스워드 입니다." : "패스워드는 8자 이상입니다."
+            self.pwTextField.backgroundColor = bool ? .systemGreen : .gray
+        }
+        
+        viewModel.nicknameIsValid.bind { bool in
+            self.statusLabel.text = bool ? "닉네임이 입력되었습니다." : "닉네임을 입력해 주세요."
+            self.nickNameTextField.backgroundColor = bool ? .systemGreen : .gray
+        }
+        
+        viewModel.locationIsValid.bind { bool in
+            self.statusLabel.text = bool ? "지역정보가 입력되었습니다." : "지역정보를 입력해 주세요."
+            self.locationTextField.backgroundColor = bool ? .systemGreen : .gray
+        }
+        
+        viewModel.recommandIsValid.bind { bool in
+            self.statusLabel.text = bool ? "추천인이 입력되었습니다." : "추천인을 입력해 주세요."
+            self.recommandTextField.backgroundColor = bool ? .systemGreen : .gray
         }
     }
     
@@ -88,16 +125,23 @@ final class LoginViewController: UIViewController {
             view.addSubview(components)
         }
         
-        inputTargets.forEach { $0.addTarget(self, action: #selector(eachButtonChanged), for: .editingChanged)
-        }
+        inputTargets.forEach { $0.addTarget(self, action: #selector(eachButtonChanged), for: .editingChanged) }
+        
     }
     
-    @objc func eachButtonChanged() {
+    @objc func eachButtonChanged(_ textField: SignInfoTextField) {
+        guard let idx = inputTargets.firstIndex(of: textField) else { return }
+        let object = viewModel.textFieldObject[idx]
+        object.value = textField.text ?? ""
+        viewModel.checkValidation()
         
-        for (idx, _) in inputTargets.enumerated() {
-            let object = viewModel.textFieldObject[idx]
-            object.value = inputTargets[idx].text ?? ""
-            viewModel.checkValidation()
+        switch idx {
+        case 0: viewModel.checkEmailValidation()
+        case 1: viewModel.checkPwValidation()
+        case 2: viewModel.checkNicknameValidation()
+        case 3: viewModel.checkLocationValidation()
+        case 4: viewModel.checkRecommandValidation()
+        default: break
         }
     }
     
@@ -154,6 +198,13 @@ final class LoginViewController: UIViewController {
         toggleSwitch.snp.makeConstraints { make in
             make.trailing.equalTo(idTextField)
             make.centerY.equalTo(additionalInfoLabel)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.width.equalTo(idTextField)
+            make.height.equalTo(idTextField)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            make.centerX.equalTo(view)
         }
     }
 }
